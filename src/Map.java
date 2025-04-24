@@ -6,7 +6,7 @@ import java.util.Random;
 public class Map {
     int ySize = 5;
     int xSize = 5;
-    char[][] mapMatrix = new char[ySize][xSize];
+    Field[][] mapMatrix = new Field[ySize][xSize];
 
     public boolean isPlayerInRange(int x, int y) {
         return x < ySize && x >= 0 && y < xSize && y >= 0;
@@ -15,7 +15,7 @@ public class Map {
     public void showMap() {
         for(int i = 0; i < ySize; i++) {
             for(int j = 0; j < xSize; j++) {
-                System.out.printf("%c ", mapMatrix[i][j]);
+                System.out.printf("%c ", mapMatrix[i][j].type);
             }
             System.out.println();
         }
@@ -26,27 +26,39 @@ public class Map {
         int fields = xSize * ySize - 1; //player occupies one field
         int opponents = random.nextInt(fields/3 - 3) + 3;
         int lootFields = random.nextInt(fields - opponents) + 1; //todo: change ratio
-        int emptyFields = fields - opponents - lootFields;
 
         List<Field> fieldList = new ArrayList<>();
 
         for(int y = 0; y < ySize; y++) {
             for(int x = 0; x < xSize; x++) {
-                fieldList.add(new Field(x, y));
+                mapMatrix[y][x] = new Field(x, y);
+                fieldList.add(mapMatrix[y][x]);
             }
         }
-
         Collections.shuffle(fieldList);
 
+        for (int i = 0; i < fieldList.size(); i++) {
+            Field f = fieldList.get(i);
 
+            if (i < lootFields) {
+                f.type = '$';
+            } else if (i < lootFields + opponents) {
+                f.type = 'W';
+            } else {
+                f.type = '.';
+            }
+        }
+        }
     }
 
-    private class Field {
-        int x, y;
+    class Field {
+        int x;
+        int y;
+        //boolean isUncovered = false;
         char type = '?';
         Field(int x, int y) {
             this.x = x;
             this.y = y;
         }
     }
-}
+
