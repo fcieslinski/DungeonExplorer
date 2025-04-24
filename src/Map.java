@@ -15,7 +15,11 @@ public class Map {
     public void showMap() {
         for(int i = 0; i < ySize; i++) {
             for(int j = 0; j < xSize; j++) {
-                System.out.printf("%c ", mapMatrix[i][j].type);
+                if(mapMatrix[i][j].isUncovered) {
+                    System.out.printf("%c ", mapMatrix[i][j].type);
+                } else {
+                    System.out.printf("? ");
+                }
             }
             System.out.println();
         }
@@ -24,8 +28,8 @@ public class Map {
     public void generateMap() {
         Random random = new Random();
         int fields = xSize * ySize - 1; //player occupies one field
-        int opponents = random.nextInt(fields/3 - 3) + 3;
-        int lootFields = random.nextInt(fields - opponents) + 1; //todo: change ratio
+        int opponents = random.nextInt(fields/6) + 4;
+        int lootFields = random.nextInt(opponents) + 2; //todo: change ratio
 
         List<Field> fieldList = new ArrayList<>();
 
@@ -41,11 +45,14 @@ public class Map {
             Field f = fieldList.get(i);
 
             if (i < lootFields) {
-                f.type = '$';
+                f.type = '$'; //loot
             } else if (i < lootFields + opponents) {
-                f.type = 'W';
+                f.type = 'W'; //opponent
+            } else if (i == fieldList.size() - 1) {
+                f.type = '@'; //player
+                f.isUncovered = true;
             } else {
-                f.type = '.';
+                f.type = '.'; //empty
             }
         }
         }
@@ -54,8 +61,8 @@ public class Map {
     class Field {
         int x;
         int y;
-        //boolean isUncovered = false;
-        char type = '?';
+        boolean isUncovered = false;
+        char type;
         Field(int x, int y) {
             this.x = x;
             this.y = y;
