@@ -7,6 +7,8 @@ public class Map {
     int ySize = 5;
     int xSize = 5;
     Field[][] mapMatrix = new Field[ySize][xSize];
+    int playerStarX;
+    int playerStarY;
 
     public boolean isPlayerInRange(int x, int y) {
         return x < ySize && x >= 0 && y < xSize && y >= 0;
@@ -29,7 +31,7 @@ public class Map {
         Random random = new Random();
         int fields = xSize * ySize - 1; //player occupies one field
         int opponents = random.nextInt(fields/6) + 4;
-        int lootFields = random.nextInt(opponents) + 2; //todo: change ratio
+        int lootFields = random.nextInt(opponents) + 2;
 
         List<Field> fieldList = new ArrayList<>();
 
@@ -50,6 +52,8 @@ public class Map {
                 f.type = 'W'; //opponent
             } else if (i == fieldList.size() - 1) {
                 f.type = '@'; //player
+                playerStarX = f.x;
+                playerStarY = f.y;
                 f.isUncovered = true;
             } else {
                 f.type = '.'; //empty

@@ -2,12 +2,16 @@ import java.util.List;
 
 public class Player {
     String name;
-    int hp;
-    int power;
+    int hp = 100;
+    int power = 1;
     int x, y;
     List<String> equipment;
     Map currentMap;
 
+    Player(String name, Map currentMap) {
+        this.currentMap = currentMap;
+        this.name = name;
+    }
 
     public void moveUp() {
         if(currentMap.isPlayerInRange(x, y++)) {
