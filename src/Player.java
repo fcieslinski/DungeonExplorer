@@ -8,41 +8,23 @@ public class Player {
     List<String> equipment;
     Map currentMap;
 
-    Player(String name, Map currentMap) {
+    Player(String name, Map currentMap, int x, int y) {
         this.currentMap = currentMap;
         this.name = name;
+        this.x = x;
+        this.y = y;
     }
 
-    public void moveUp() {
-        if(currentMap.isPlayerInRange(x, y++)) {
-           y++;
+    public void move(int dx, int dy) {
+        int newX = x + dx;
+        int newY = y + dy;
+
+        if(currentMap.isPlayerInRange(newX, newY)) {
+            this.x = newX;
+            this.y = newY;
+            currentMap.showMap();
         } else {
             System.out.println("Nice try, but there's nothing beyond the edge!");
         }
     }
-
-    public void moveDown() {
-        if(currentMap.isPlayerInRange(x, y--)) {
-            y--;
-        } else {
-            System.out.println("Nice try, but there's nothing beyond the edge!");
-        }
-    }
-
-    public void moveRight() {
-        if(currentMap.isPlayerInRange(x++, y)) {
-            x++;
-        } else {
-            System.out.println("Nice try, but there's nothing beyond the edge!");
-        }
-    }
-
-    public void moveLeft() {
-        if(currentMap.isPlayerInRange(x--, y)) {
-            x--;
-        } else {
-            System.out.println("Nice try, but there's nothing beyond the edge!");
-        }
-    }
-
 }

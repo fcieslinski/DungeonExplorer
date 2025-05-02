@@ -10,8 +10,16 @@ public class Map {
     int playerStarX;
     int playerStarY;
 
+    public int getPlayerStarX() {
+        return playerStarX;
+    }
+
+    public int getPlayerStarY() {
+        return playerStarY;
+    }
+
     public boolean isPlayerInRange(int x, int y) {
-        return x < ySize && x >= 0 && y < xSize && y >= 0;
+        return x <= (xSize - 1) && x >= 0 && y <= (ySize - 1) && y >= 0;
     }
 
     public void showMap() {

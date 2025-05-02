@@ -9,30 +9,16 @@ public class Main {
 
         System.out.println("> Enter your nickname: <");
         String nickname = sc.next();
-        Player player = new Player(nickname, mapa);
+        Player player = new Player(nickname, mapa, mapa.getPlayerStarX(), mapa.getPlayerStarY());
         while(true) {
             switch (sc.next()) {
-                case "w":
-                    player.moveUp();
-                    mapa.showMap();
-                    break;
-                case "s":
-                    player.moveDown();
-                    mapa.showMap();
-                    break;
-                case "a":
-                    player.moveLeft();
-                    mapa.showMap();
-                    break;
-                case "d":
-                    player.moveRight();
-                    mapa.showMap();
-                    break;
-                default:
-                    System.out.println("> Use 'w', 's', 'a', 'd' to make move. <");
-                    break;
-            }
+                case "w" -> player.move(0, -1);
+                case "s" -> player.move(0, 1);
+                case "a" -> player.move(-1, 0);
+                case "d" -> player.move(1, 0);
+                default -> System.out.println("> Use 'w', 's', 'a', 'd' to make move. <");
 
+            }
         }
     }
 }
