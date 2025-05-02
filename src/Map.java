@@ -22,11 +22,13 @@ public class Map {
         return x <= (xSize - 1) && x >= 0 && y <= (ySize - 1) && y >= 0;
     }
 
-    public void showMap() {
+    public void showMap(Player player) {
         for(int i = 0; i < ySize; i++) {
             for(int j = 0; j < xSize; j++) {
                 if(mapMatrix[i][j].isUncovered) {
                     System.out.printf("%c ", mapMatrix[i][j].type);
+                } else if(player.x == j && player.y ==i) {
+                    System.out.printf("P ");
                 } else {
                     System.out.printf("? ");
                 }

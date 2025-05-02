@@ -5,11 +5,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         Map mapa = new Map();
         mapa.generateMap();
-        mapa.showMap();
 
         System.out.println("> Enter your nickname: <");
         String nickname = sc.next();
         Player player = new Player(nickname, mapa, mapa.getPlayerStarX(), mapa.getPlayerStarY());
+        mapa.showMap(player);
         while(true) {
             switch (sc.next()) {
                 case "w" -> player.move(0, -1);
@@ -17,8 +17,8 @@ public class Main {
                 case "a" -> player.move(-1, 0);
                 case "d" -> player.move(1, 0);
                 default -> System.out.println("> Use 'w', 's', 'a', 'd' to make move. <");
-
             }
+            mapa.showMap(player);
         }
     }
 }

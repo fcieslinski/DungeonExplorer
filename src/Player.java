@@ -15,6 +15,7 @@ public class Player {
         this.y = y;
     }
 
+
     public void move(int dx, int dy) {
         int newX = x + dx;
         int newY = y + dy;
@@ -22,7 +23,6 @@ public class Player {
         if(currentMap.isPlayerInRange(newX, newY)) {
             this.x = newX;
             this.y = newY;
-            currentMap.showMap();
         } else {
             System.out.println("Nice try, but there's nothing beyond the edge!");
         }
