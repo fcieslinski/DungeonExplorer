@@ -25,7 +25,7 @@ public class Map {
     public void showMap(Player player) {
         for(int i = 0; i < ySize; i++) {
             for(int j = 0; j < xSize; j++) {
-                if(mapMatrix[i][j].isUncovered) {
+                if(mapMatrix[i][j].isUncovered && !(player.x == j && player.y ==i)) {
                     System.out.printf("%c ", mapMatrix[i][j].type);
                 } else if(player.x == j && player.y ==i) {
                     System.out.printf("P ");
@@ -70,6 +70,27 @@ public class Map {
             }
         }
         }
+
+        public void checkField(int x, int y) {
+            if(!mapMatrix[y][x].isUncovered) {
+                mapMatrix[y][x].isUncovered = true;
+                switch(mapMatrix[y][x].type) {
+                    case 'W' -> opponentField();
+                    case '$' -> lootField();
+                }
+            }
+        }
+
+        private void opponentField() {
+            System.out.println("-Opponent-");
+        }
+
+        private void lootField() {
+            System.out.println("-Loot-");
+        }
+
+
+
     }
 
     class Field {

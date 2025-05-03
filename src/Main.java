@@ -9,6 +9,7 @@ public class Main {
         System.out.println("> Enter your nickname: <");
         String nickname = sc.next();
         Player player = new Player(nickname, mapa, mapa.getPlayerStarX(), mapa.getPlayerStarY());
+        System.out.println("Hello " + nickname + "!");
         mapa.showMap(player);
         while(true) {
             switch (sc.next()) {

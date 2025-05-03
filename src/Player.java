@@ -23,6 +23,7 @@ public class Player {
         if(currentMap.isPlayerInRange(newX, newY)) {
             this.x = newX;
             this.y = newY;
+            currentMap.checkField(newX, newY);
         } else {
             System.out.println("Nice try, but there's nothing beyond the edge!");
         }
